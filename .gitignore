@@ -1,0 +1,12 @@
+.DS_Store
+.idea
+node_modules
+*.sublime-*
+my-config.yaml
+
+*.gitattributes
+*.ntvs_analysis.dat
+*.njsproj
+
+*.log
+*.orig

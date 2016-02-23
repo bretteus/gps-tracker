@@ -1,0 +1,23 @@
+{
+  "name": "gps-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bretteus/gps-tracker.git"
+  },
+  "author": "Brett Myers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bretteus/gps-tracker/issues"
+  },
+  "homepage": "https://github.com/bretteus/gps-tracker#readme",
+  "dependencies": {
+    "hapi": "^13.0.0",
+    "inert": "^3.2.0"
+  }
+}
