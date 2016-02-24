@@ -1,3 +1,5 @@
+'use strict';
+
 var pg = require('pg');
 var connectionString = 'REPLACE WITH CONNECTION STRING';
 

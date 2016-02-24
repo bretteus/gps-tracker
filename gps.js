@@ -1,3 +1,5 @@
+'use strict';
+
 var $ = {};
 
 $.getGps = function(request, reply) {
