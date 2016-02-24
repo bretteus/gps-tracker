@@ -23,15 +23,14 @@ $.pollGpsCoordinate = function() {
             // Handle connection errors
             if(err) {
                 done();
-                console.log(err.message);
-                return console.log('Failed to fetch data from database')
+                console.log('Failed to fetch data from database');
+                return console.log(err.message);
             }
 
             var query = client.query("SELECT * FROM coordinates ORDER BY external_id DESC LIMIT 1");
 
             query.on('row', function(row) {
                 db_results.push(row);
-                console.log('Coordinates pushed onto result array')
             });
 
             // After all data is returned, close connection and return results
