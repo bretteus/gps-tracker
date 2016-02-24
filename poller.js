@@ -23,14 +23,15 @@ $.pollGpsCoordinate = function() {
             // Handle connection errors
             if(err) {
                 done();
-                console.log(err);
-                return res.status(500).json({ success: false, data: err});
+                console.log(err.message);
+                return console.log('Failed to fetch data from database')
             }
 
             var query = client.query("SELECT * FROM coordinates ORDER BY external_id DESC LIMIT 1");
 
             query.on('row', function(row) {
                 db_results.push(row);
+                console.log('Coordinates pushed onto result array')
             });
 
             // After all data is returned, close connection and return results
@@ -39,9 +40,11 @@ $.pollGpsCoordinate = function() {
 
                 var db_result = db_results[0];
                 if (db_result && message.id.toString() === db_result.external_id) {
+                    done();
                     return console.log('Duplicate data point retrieved and ignored');
                 }
                 if (db_result && message.dateTime <= db_result.timestamp) {
+                    done();
                     return console.log('A later data coordinate has already been stored');
                 }
                 // save gps point
