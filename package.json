@@ -19,6 +19,9 @@
   "homepage": "https://github.com/bretteus/gps-tracker#readme",
   "dependencies": {
     "hapi": "^13.0.0",
-    "inert": "^3.2.0"
+    "inert": "^3.2.0",
+    "node-schedule": "^1.0.0",
+    "pg": "^4.4.6",
+    "request": "^2.69.0"
   }
 }
