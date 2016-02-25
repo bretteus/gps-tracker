@@ -28,9 +28,13 @@ $.getCoordinates = function(request, reply) {
                 },
                 type: "Feature",
                 id: coordinate.id,
-                properties: {}
+                properties: {
+                    description: 'test',
+                    timestamp: coordinate.timestamp
+                }
             };
         });
+        geoJson.features.reverse();
         return reply(geoJson);
     });
 };
