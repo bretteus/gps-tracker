@@ -18,17 +18,9 @@ server.connection({ port: port });
 
 server.route({
     method: 'GET',
-    path: '/coordinates',
+    path: '/api/coordinates',
     handler: function(request, reply) {
         api.getCoordinates(request, reply);
-    }
-});
-
-server.route({
-    method: 'GET',
-    path: '/coordinates/latest',
-    handler: function(request, reply) {
-        api.getLatestCoordinates(request, reply);
     }
 });
 
