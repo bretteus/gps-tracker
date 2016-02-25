@@ -45,6 +45,14 @@ server.register(require('inert'), (err) => {
             reply.file('./public/map.html');
         }
     });
+
+    server.route({
+        method: 'GET',
+        path: '/public/leaflet-realtime',
+        handler: function (request, reply) {
+            reply.file('./public/leaflet.realtime.js');
+        }
+    });
 });
 
 server.start((err) => {

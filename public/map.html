@@ -1,1 +1,27 @@
-<h1>MAP!</h1>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<script src="/public/leaflet-realtime"></script>
+<div id="map" style="height: 300px"></div>
+<script type="text/javascript">
+    var map = L.map('map');
+
+    var layer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'bretteus.p8fjfj59',
+        accessToken: 'pk.eyJ1IjoiYnJldHRldXMiLCJhIjoiY2lsMmdnOHFwM2NjN3ZvbTNoMTI4dGZ6ciJ9.tkYgKdNa7r7YRtO9SLgouw'
+    }).addTo(map);
+
+    var realtime = L.realtime({
+        url: '/coordinates',
+        crossOrigin: true,
+        type: 'json'
+    }, {
+        internal: 3 * 1000 // 3 minutes
+    }).addTo(map);
+
+    realtime.on('update', function() {
+        map.fitBounds(realtime.getBounds(), {maxZoom: 14});
+    });
+
+</script>
