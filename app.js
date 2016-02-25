@@ -1,5 +1,6 @@
 'use strict';
 
+var api = require('./api');
 var schedule = require('node-schedule');
 var poller = require('./poller');
 
@@ -18,16 +19,16 @@ server.connection({ port: port });
 server.route({
     method: 'GET',
     path: '/coordinates',
-    handler: function (request, reply) {
-        reply('Hello, world!');
+    handler: function(request, reply) {
+        api.getCoordinates(request, reply);
     }
 });
 
 server.route({
     method: 'GET',
     path: '/coordinates/latest',
-    handler: function (request, reply) {
-        reply('Hello, world!');
+    handler: function(request, reply) {
+        api.getLatestCoordinates(request, reply);
     }
 });
 

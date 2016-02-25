@@ -34,7 +34,7 @@ $.pollGpsCoordinate = function() {
                 return console.log('A later data coordinate has already been stored');
             }
 
-            db.query("INSERT INTO coordinates(external_id, timestamp, latitude, longitude, message_type) values($1, $2, $3, $4, $5)", [message.id.toString(), message.dateTime, message.latitude, message.longitude, message.messageType], function(er) {
+            db.query("INSERT INTO coordinates(external_id, timestamp, latitude, longitude, message_type) values ($1, $2, $3, $4, $5)", [message.id.toString(), message.dateTime, message.latitude, message.longitude, message.messageType], function(er) {
                 if(er) {
                     console.log('Failed to save data to database');
                     return console.log(er.message);
