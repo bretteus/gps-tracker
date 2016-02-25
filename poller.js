@@ -17,14 +17,12 @@ $.pollGpsCoordinate = function() {
         } catch (error) {
             return console.log('Error parsing Spot response = ' + results.body);
         }
-        console.log('Fetched latest coordinates from SPOT');
 
         db.query('SELECT * FROM coordinates ORDER BY external_id DESC LIMIT 1', null, function(err, db_results) {
             if(err) {
                 console.log('Failed to fetch data from database');
                 return console.log(err.message);
             }
-            console.log('Fetched last saved coordinates');
 
             var db_result = db_results.rows[0];
             if (db_result && message.id.toString() === db_result.external_id) {

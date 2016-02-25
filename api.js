@@ -20,11 +20,13 @@ $.getCoordinates = function(request, reply) {
             return reply(geoJson);
         }
 
+        var lineCoordinates = [];
         geoJson.features = _.map(db_results.rows, function(coordinate) {
+            lineCoordinates.push([Number(coordinate.longitude), Number(coordinate.latitude)]);
             return {
                 geometry: {
                     type: "Point",
-                    coordinates: [coordinate.longitude, coordinate.latitude]
+                    coordinates: [Number(coordinate.longitude), Number(coordinate.latitude)]
                 },
                 type: "Feature",
                 id: coordinate.id,
@@ -35,6 +37,7 @@ $.getCoordinates = function(request, reply) {
             };
         });
         geoJson.features.reverse();
+
         return reply(geoJson);
     });
 };

@@ -17,11 +17,12 @@
 
     var realtime = L.realtime({
         url: '/api/coordinates',
-        crossOrigin: true,
         type: 'json'
     }, {
         onEachFeature: function(feature, layer) {
-            layer.bindPopup((new Date(feature.properties.timestamp).toString()));
+            if (feature.geometry.type === 'Point') {
+                layer.bindPopup((new Date(feature.properties.timestamp)).toString());
+            }
         },
         internal: 5 * 1000 * 60 // 5 minutes
     }).addTo(map);
