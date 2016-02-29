@@ -45,6 +45,14 @@ server.register(require('inert'), (err) => {
             reply.file('./public/leaflet.realtime.js');
         }
     });
+
+    server.route({
+        method: 'GET',
+        path: '/public/leaflet-icon-glyph',
+        handler: function (request, reply) {
+            reply.file('./public/leaflet.icon.glyph.js');
+        }
+    });
 });
 
 server.start((err) => {

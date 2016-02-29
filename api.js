@@ -20,8 +20,10 @@ $.getCoordinates = function(request, reply) {
             return reply(geoJson);
         }
 
+        var count = db_results.rows.length + 1;
         var lineCoordinates = [];
         geoJson.features = _.map(db_results.rows, function(coordinate) {
+            count--;
             lineCoordinates.push([Number(coordinate.longitude), Number(coordinate.latitude)]);
             return {
                 geometry: {
@@ -29,14 +31,27 @@ $.getCoordinates = function(request, reply) {
                     coordinates: [Number(coordinate.longitude), Number(coordinate.latitude)]
                 },
                 type: "Feature",
-                id: coordinate.id,
                 properties: {
-                    description: 'test',
+                    id: coordinate.id,
+                    count: count,
                     timestamp: coordinate.timestamp
                 }
             };
         });
         geoJson.features.reverse();
+
+        geoJson.features.push({
+            geometry: {
+                type: "LineString",
+                coordinates: lineCoordinates
+            },
+            type: "Feature",
+            properties: {
+                id: 'line',
+                count: count,
+                timestamp: 'test'
+            }
+        });
 
         return reply(geoJson);
     });

@@ -2,6 +2,7 @@
 <head>
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 <script src="/public/leaflet-realtime"></script>
+<script src="/public/leaflet-icon-glyph"></script>
 </head>
 <body style="margin:0">
 <div id="map" style="height: 300px; margin:0; padding:0;"></div>
@@ -23,6 +24,13 @@
             if (feature.geometry.type === 'Point') {
                 layer.bindPopup((new Date(feature.properties.timestamp)).toString());
             }
+        },
+        pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, {
+                icon: L.icon.glyph({
+                    glyph: feature.properties.count
+                })
+            });
         },
         internal: 5 * 1000 * 60 // 5 minutes
     }).addTo(map);
