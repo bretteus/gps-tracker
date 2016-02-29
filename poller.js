@@ -5,6 +5,7 @@ var $ = {};
 var pg = require('pg');
 var db = require('./db-client');
 var spot = require('./spot-client');
+var moment = require('moment');
 
 $.pollGpsCoordinate = function() {
     spot.getLatestCoordinate(function(error, results) {
@@ -27,9 +28,6 @@ $.pollGpsCoordinate = function() {
             var db_result = db_results.rows[0];
             if (db_result && message.id.toString() === db_result.external_id) {
                 return console.log('Duplicate data point retrieved and ignored');
-            }
-            if (db_result && message.dateTime <= db_result.timestamp) {
-                return console.log('A later data coordinate has already been stored');
             }
 
             db.query("INSERT INTO coordinates(external_id, timestamp, latitude, longitude, message_type) values ($1, $2, $3, $4, $5)", [message.id.toString(), message.dateTime, message.latitude, message.longitude, message.messageType], function(er) {

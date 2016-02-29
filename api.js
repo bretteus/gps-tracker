@@ -47,9 +47,7 @@ $.getCoordinates = function(request, reply) {
             },
             type: "Feature",
             properties: {
-                id: 'line',
-                count: count,
-                timestamp: 'test'
+                id: 'line'
             }
         });
 
