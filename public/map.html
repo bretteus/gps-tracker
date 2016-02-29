@@ -32,14 +32,16 @@
                 icon = L.marker(latlng,
                     {
                         icon: L.icon.pulse({
-                            iconSize: [10, 10],
+                            iconSize: [12, 12],
                             color: '#004080'
                         })
                     }
                 );
             } else {
                 icon = L.circleMarker(latlng, {
-                    color: '#004080'
+                    color: '#004080',
+                    radius: 6,
+                    fillOpacity: feature.properties.opacity
                 });
             }
             return icon;

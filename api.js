@@ -10,7 +10,7 @@ $.getCoordinates = function(request, reply) {
 
     var timestamp = request.params.timestamp ? moment(timestamp) : moment.utc().subtract(2, 'days');
 
-    db.query('SELECT * FROM coordinates WHERE timestamp > $1 ORDER BY timestamp DESC LIMIT 100', [timestamp.format()], function(error, db_results) {
+    db.query('SELECT * FROM coordinates WHERE timestamp > $1 ORDER BY timestamp DESC LIMIT 10', [timestamp.format()], function(error, db_results) {
         var geoJson = {
             type: "FeatureCollection",
             features: []
@@ -35,6 +35,7 @@ $.getCoordinates = function(request, reply) {
                 properties: {
                     id: coordinate.id,
                     latest: count === 1 ? true : false,
+                    opacity: (db_results.rows.length - count) / db_results.rows.length,
                     timestamp: coordinate.timestamp
                 }
             };
