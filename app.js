@@ -40,19 +40,27 @@ server.register(require('inert'), (err) => {
 
     server.route({
         method: 'GET',
-        path: '/public/leaflet-realtime',
+        path: '/static/leaflet-realtime',
         handler: function (request, reply) {
-            reply.file('./public/leaflet.realtime.js');
+            reply.file('./static/leaflet.realtime.js');
         }
     });
 
     server.route({
         method: 'GET',
-        path: '/public/leaflet-icon-glyph',
+        path: '/static/leaflet-icon-pulse',
         handler: function (request, reply) {
-            reply.file('./public/leaflet.icon.glyph.js');
+            reply.file('./static/leaflet.icon.pulse.js');
         }
     });
+
+server.route({
+    method: 'GET',
+    path: '/static/css/leaflet-icon-pulse',
+    handler: function (request, reply) {
+        reply.file('./static/leaflet.icon.pulse.css');
+    }
+});
 });
 
 server.start((err) => {

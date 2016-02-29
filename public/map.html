@@ -1,8 +1,9 @@
 <html><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 <head>
-<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-<script src="/public/leaflet-realtime"></script>
-<script src="/public/leaflet-icon-glyph"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="/static/leaflet-realtime"></script>
+    <script src="/static/leaflet-icon-pulse"></script>
+    <link rel="stylesheet" href="/static/css/leaflet-icon-pulse"></link>
 </head>
 <body style="margin:0">
 <div id="map" style="height: 300px; margin:0; padding:0;"></div>
@@ -26,11 +27,22 @@
             }
         },
         pointToLayer: function (feature, latlng) {
-            return L.marker(latlng, {
-                icon: L.icon.glyph({
-                    glyph: feature.properties.count
-                })
-            });
+            var icon = null;
+            if (feature.properties.latest) {
+                icon = L.marker(latlng,
+                    {
+                        icon: L.icon.pulse({
+                            iconSize: [10, 10],
+                            color: '#004080'
+                        })
+                    }
+                );
+            } else {
+                icon = L.circleMarker(latlng, {
+                    color: '#004080'
+                });
+            }
+            return icon;
         },
         internal: 5 * 1000 * 60 // 5 minutes
     }).addTo(map);
